@@ -27,3 +27,11 @@ impl Pasori {
         }
     }
 }
+
+impl Drop for Pasori {
+    fn drop(&mut self) {
+        unsafe {
+            pafe_sys::pasori_close(self.pointer)
+        }
+    }
+}
