@@ -1,0 +1,13 @@
+[package]
+name = "pafe-sys"
+description = "Bindings for the libpafe library"
+homepage = "https://github.com/mistydemeo/pafe.rs"
+repository = "https://github.com/mistydemeo/pafe.rs"
+version = "0.1.0"
+authors = ["Misty De Meo <mistydemeo@gmail.com>"]
+edition = "2018"
+categories = ["external-ffi-bindings"]
+license = "GPL-2.0-only"
+
+[dependencies]
+libc = "0.2.40"
