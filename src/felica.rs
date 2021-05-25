@@ -1,5 +1,5 @@
 use pafe_sys;
 
 pub struct FelicaTag {
-    pub pointer: *mut pafe_sys::Felica,
+    pub tag: pafe_sys::Felica,
 }

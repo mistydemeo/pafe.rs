@@ -44,7 +44,7 @@ impl Pasori {
         }
     }
 
-    pub fn poll(&self, card_type: CardType) -> Result<FelicaTag, String> {
+    pub fn poll(&self, card_type: CardType) -> Option<FelicaTag> {
         let card_type_raw = card_type.to_sys();
         let pointer;
         unsafe {
@@ -53,10 +53,16 @@ impl Pasori {
             // npasoriv does the same.
             pointer = pafe_sys::felica_polling(self.pointer, card_type_raw, 0, 0);
         }
+        if pointer.is_null() {
+            return None;
+        }
 
-        let tag = FelicaTag { pointer };
+        let tag;
+        unsafe {
+            tag = FelicaTag { tag: *pointer };
+        }
 
-        return Ok(tag)
+        return Some(tag)
     }
 }
 
