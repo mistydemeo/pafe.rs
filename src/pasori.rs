@@ -47,18 +47,15 @@ impl Pasori {
     pub fn poll(&self, card_type: CardType) -> Option<FelicaTag> {
         let card_type_raw = card_type.to_sys();
         let pointer;
+        let tag;
         unsafe {
             // According to libpafe, RFU, the third parameter, is always 0.
             // It's probably safe to just hardcode it here.
             // npasoriv does the same.
             pointer = pafe_sys::felica_polling(self.pointer, card_type_raw, 0, 0);
-        }
-        if pointer.is_null() {
-            return None;
-        }
-
-        let tag;
-        unsafe {
+            if pointer.is_null() {
+                return None;
+            }
             tag = FelicaTag { tag: *pointer };
         }
 
