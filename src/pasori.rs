@@ -12,7 +12,7 @@ pub enum Timeslot {
 // Taken from this document; these are the only supported values.
 // https://www.sony.net/Products/felica/business/tech-support/data/card_usersmanual_2.11e.pdf
 impl Timeslot {
-    pub fn to_i(&self) -> u8 {
+    pub fn to_u8(&self) -> u8 {
         match self {
             Self::N0 => 0,
             Self::N1 => 1,
@@ -74,7 +74,7 @@ impl Pasori {
             // According to libpafe, RFU, the third parameter, is always 0.
             // It's probably safe to just hardcode it here.
             // npasoriv does the same.
-            pointer = pafe_sys::felica_polling(self.pointer, card_type_raw, 0, timeslot.to_i());
+            pointer = pafe_sys::felica_polling(self.pointer, card_type_raw, 0, timeslot.to_u8());
             if pointer.is_null() {
                 return None;
             }
