@@ -15,3 +15,7 @@ brew install mistydemeo/formulae/libpafe
 ## I want to help!
 
 Thank you! I'm still in the early stages of working on this, so the project structure may change frequently. PRs that add more bindings to the lower-level functions.
+
+## License
+
+GPL 2.0, matching libpafe itself.
