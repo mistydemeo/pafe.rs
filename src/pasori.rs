@@ -60,34 +60,26 @@ pub struct Pasori {
 
 impl Pasori {
     /// Creates a handle representing a specific PaSoRi reader.
+    /// The pointer created by this method is guaranteed not to be null
+    /// and is ready for use by Pasori's methods or pafe_sys functions.
     /// Due to a limitation in the underlying library, it's not possible
     /// to choose a specific reader if more than one is attached to the
     /// computer.
-    /// The reader won't yet be initialized after calling this; make sure
-    /// to call `.init()` before calling any methods.
-    pub fn create() -> Pasori {
+    pub fn create() -> Option<Self> {
         let pasori;
-        unsafe {
-            pasori = pafe_sys::pasori_open();
-        }
-
-        Pasori { pointer: pasori }
-    }
-
-    /// Attempts to initialize the PaSoRi represented by this struct.
-    /// Returns Err if it couldn't be initialized; otherwise it returns
-    /// self, which is suitable for chaining.
-    pub fn init(&self) -> Result<&Self, String> {
         let result;
         unsafe {
-            result = pafe_sys::pasori_init(self.pointer)
+            pasori = pafe_sys::pasori_open();
+            if pasori.is_null() {
+                return None
+            }
+            result = pafe_sys::pasori_init(pasori)
+        }
+        if result == 1 {
+            return None
         }
 
-        if result == 1 {
-            return Err(format!("Unable to initialize PaSoRi; is it attached?"))
-        } else {
-            return Ok(self)
-        }
+        Some(Pasori { pointer: pasori })
     }
 
     /// Attempts to read a card within NFC distance. If successful, returns
