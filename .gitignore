@@ -1,2 +1,6 @@
 /target
 /pafe-sys/target
+
+# Local only test programs
+/pafe-sys/src/main.rs
+/src/bin/
