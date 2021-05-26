@@ -8,6 +8,3 @@ authors = ["Misty De Meo <mistydemeo@gmail.com>"]
 edition = "2018"
 categories = ["external-ffi-bindings"]
 license = "GPL-2.0-only"
-
-[dependencies]
-libc = "0.2.40"
