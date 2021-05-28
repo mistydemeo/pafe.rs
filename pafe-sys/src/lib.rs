@@ -367,7 +367,7 @@ extern "C" {
         v1: *mut ::std::os::raw::c_int,
         v2: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
-    pub fn pasori_type(p: *mut Pasori) -> ::std::os::raw::c_int;
+    pub fn pasori_type(p: *mut Pasori) -> ::std::os::raw::c_uint;
     pub fn pasori_test(
         p: *mut Pasori,
         code: ::std::os::raw::c_int,
