@@ -133,6 +133,54 @@ impl Pasori {
             _ => None,
         }
     }
+
+    /// Performs a self-test to ensure the EPROM is functioning correctly.
+    pub fn test_eprom(&self) -> bool {
+        let result;
+        unsafe {
+            result = pafe_sys::pasori_test_eprom(self.pointer);
+        }
+
+        Pasori::int_as_bool(result)
+    }
+
+    /// Performs a self-test to ensure the RAM is functioning correctly.
+    pub fn test_ram(&self) -> bool {
+        let result;
+        unsafe {
+            result = pafe_sys::pasori_test_ram(self.pointer);
+        }
+
+        Pasori::int_as_bool(result)
+    }
+
+    /// Performs a self-test to ensure the CPU is functioning correctly.
+    pub fn test_cpu(&self) -> bool {
+        let result;
+        unsafe {
+            result = pafe_sys::pasori_test_cpu(self.pointer);
+        }
+
+        Pasori::int_as_bool(result)
+    }
+
+    /// Performs a self-test to ensure the polling feature is functioning correctly.
+    pub fn test_polling(&self) -> bool {
+        let result;
+        unsafe {
+            result = pafe_sys::pasori_test_polling(self.pointer);
+        }
+
+        Pasori::int_as_bool(result)
+    }
+
+    fn int_as_bool(val: i32) -> bool {
+        if val == 0 {
+            true
+        } else {
+            false
+        }
+    }
 }
 
 impl Drop for Pasori {
