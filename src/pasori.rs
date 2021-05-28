@@ -51,6 +51,13 @@ impl CardType {
     }
 }
 
+/// Represents a particular model of Sony PaSoRi reader.
+pub enum ReaderType {
+    S310,
+    S320,
+    S330,
+}
+
 /// Represents an individual PaSoRi reader.
 /// This can be created by calling Pasori::create().
 /// Methods on this struct will interact with the same PaSoRi reader it was created from.
@@ -110,6 +117,21 @@ impl Pasori {
         }
 
         return Some(tag)
+    }
+
+    /// Queries the reader represented by this `Pasori` for its type.
+    /// Returns Some(ReaderType) if the reader returned a value.
+    pub fn reader_type(&self) -> Option<ReaderType> {
+        let value;
+        unsafe {
+            value = pafe_sys::pasori_type(self.pointer);
+        }
+        match value {
+            pafe_sys::PASORI_TYPE_PASORI_TYPE_S310 => Some(ReaderType::S310),
+            pafe_sys::PASORI_TYPE_PASORI_TYPE_S320 => Some(ReaderType::S320),
+            pafe_sys::PASORI_TYPE_PASORI_TYPE_S330 => Some(ReaderType::S330),
+            _ => None,
+        }
     }
 }
 
