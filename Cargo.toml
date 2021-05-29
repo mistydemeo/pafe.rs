@@ -6,7 +6,7 @@ repository = "https://github.com/mistydemeo/pafe.rs"
 version = "0.1.0"
 authors = ["Misty De Meo <mistydemeo@gmail.com>"]
 edition = "2018"
-categories = ["external-ffi-bindings"]
+categories = ["external-ffi-bindings", "smartcard"]
 license = "GPL-2.0-only"
 
 [dependencies.pafe-sys]
