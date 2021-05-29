@@ -18,7 +18,7 @@ The second crate included in this repo, `pafe-sys`, is an automatically-generate
 
 ## I want to help!
 
-Thank you! I'm still in the early stages of working on this, so the project structure may change frequently. PRs that add more bindings to the lower-level functions.
+Thank you! I'm still in the early stages of working on this, so the project structure may change frequently. PRs that add more high-level mappings of the lower-level functions are welcome.
 
 ## License
 
